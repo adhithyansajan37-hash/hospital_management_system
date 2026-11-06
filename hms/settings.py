@@ -29,11 +29,14 @@ SECRET_KEY = os.environ.get(
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+
 ALLOWED_HOSTS = [
     'local host',
     '127.0.0.1',
     '0.0.0.0',
+    'hospital-management-system-kotp.onrender.com'
 ]
+
 
 
 # Application definition
