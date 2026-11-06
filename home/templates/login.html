@@ -1,0 +1,29 @@
+
+{% extends 'base.html' %}
+
+{% block title %}Login | Unique Wellcare Hospital{% endblock %}
+
+{% block content %}
+<section class="page-banner">
+    <div class="site-container">
+        <p class="eyebrow">WELCOME BACK</p>
+        <h1>Sign in to your account.</h1>
+        <p>Access your care and stay connected with Unique Wellcare Hospital.</p>
+    </div>
+</section>
+
+<section class="content-section auth-section">
+    <div class="site-container">
+        <div class="form-card auth-card">
+            <h2>Welcome back</h2>
+            <p class="form-intro">Enter your details to sign in.</p>
+            <form method="post" class="auth-form">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="form-submit">Sign in</button>
+            </form>
+            <p class="auth-switch">New here? <a href="{% url 'signup' %}">Create an account</a></p>
+        </div>
+    </div>
+</section>
+{% endblock %}

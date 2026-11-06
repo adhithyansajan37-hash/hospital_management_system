@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block title %}Home | Unique Wellcare Hospital{% endblock %}
+
+{% block content %}
+<section class="hero-section">
+    <div class="site-container hero-inner">
+        <div class="hero-copy">
+            <p class="eyebrow">COMPASSIONATE CARE, EVERY DAY</p>
+            <h1>Your health deserves thoughtful care.</h1>
+            <p class="hero-description">Find trusted doctors, explore our departments, and take the next step toward feeling your best.</p>
+            <div class="hero-actions">
+                <a class="button button-primary" href="{% url 'doctors' %}">Meet our doctors</a>
+                <a class="button button-secondary" href="{% url 'contact' %}">Contact us</a>
+                <a class="button button-tertiary" href="{% url 'smart_recommendation' %}">Get smart recommendations</a>
+            </div>
+        </div>
+        <div class="hero-card" aria-label="Patient care message">
+            <span class="hero-card-mark" aria-hidden="true">U</span>
+            <p class="hero-card-label">CARE THAT PUTS YOU FIRST</p>
+            <h2>Here for every step of your health journey.</h2>
+            <p>Our care team is ready to help you find the right service for your needs.</p>
+            <a href="{% url 'departments' %}">Explore departments <span aria-hidden="true">→</span></a>
+        </div>
+    </div>
+</section>
+
+<section class="content-section">
+    <div class="site-container">
+        <div class="section-heading">
+            <p class="eyebrow">CARE AND SERVICES</p>
+            <h2>How can we help?</h2>
+            <p>Get to know our team and the care available to you.</p>
+        </div>
+        <div class="feature-grid">
+            <a class="feature-card" href="{% url 'doctors' %}">
+                <span class="feature-number">01</span>
+                <h3>Experienced doctors</h3>
+                <p>Meet our specialists and find the right care for your needs.</p>
+                <span class="feature-link">View doctors <span aria-hidden="true">→</span></span>
+            </a>
+            <a class="feature-card" href="{% url 'departments' %}">
+                <span class="feature-number">02</span>
+                <h3>Our departments</h3>
+                <p>Explore the medical services and specialties we provide.</p>
+                <span class="feature-link">Browse departments <span aria-hidden="true">→</span></span>
+            </a>
+            <a class="feature-card" href="{% url 'about' %}">
+                <span class="feature-number">03</span>
+                <h3>Patient-first approach</h3>
+                <p>Learn about our commitment to thoughtful, compassionate care.</p>
+                <span class="feature-link">About Unique Wellcare Hospital <span aria-hidden="true">→</span></span>
+            </a>
+        </div>
+    </div>
+</section>
+{% endblock %}

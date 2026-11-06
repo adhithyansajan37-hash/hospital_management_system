@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}Book an Appointment | Unique Wellcare Hospital{% endblock %}
+
+{% block content %}
+<section class="page-banner">
+    <div class="site-container">
+        <p class="eyebrow">APPOINTMENTS</p>
+        <h1>Book an appointment.</h1>
+        <p>Share your details and choose a doctor and date for your visit.</p>
+    </div>
+</section>
+
+<section class="content-section form-section">
+    <div class="site-container">
+        <div class="form-card form-card--booking">
+            <h2>Appointment details</h2>
+            <p class="form-intro">Choose your doctor and preferred date. We’ll contact you to confirm.</p>
+            <form method="post" class="booking-form">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="form-submit">Confirm booking</button>
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock %}

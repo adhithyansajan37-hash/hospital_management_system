@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block title %}Contact | Unique Wellcare Hospital{% endblock %}
+
+{% block content %}
+<section class="page-banner">
+    <div class="site-container">
+        <p class="eyebrow">GET IN TOUCH</p>
+        <h1>We're here to help.</h1>
+        <p>Reach out to our team with questions about our doctors, departments, or services.</p>
+    </div>
+</section>
+
+<section class="content-section">
+    <div class="site-container contact-layout">
+        <div class="contact-copy">
+            <p class="eyebrow">CONTACT UNIQUE WELLCARE HOSPITAL</p>
+            <h2>Let’s help you find the right next step.</h2>
+            <p>For information about care and services, connect with us through the contact details below. Our team will be glad to point you in the right direction.</p>
+            <div class="contact-detail">
+                <span class="contact-detail-icon" aria-hidden="true">@</span>
+                <div>
+                    <h3>Instagram</h3>
+                    <p>{{ instagram }}</p>
+                </div>
+            </div>  
+            <div class="contact-detail">
+                <span class="contact-detail-icon" aria-hidden="true">+</span>
+                <div>
+                    <h3>WhatsApp</h3>
+                    <p>{{ whatsapp }}</p>
+                </div>
+            </div>
+        </div>
+        <aside class="contact-panel">
+            <p class="eyebrow">HOW CAN WE HELP?</p>
+            <h2>Find the information you need.</h2>
+            <p>Browse our pages to learn more about Unique Wellcare Hospital and the care available to you.</p>
+            <a class="contact-panel-link" href="{% url 'doctors' %}">Meet our doctors <span aria-hidden="true">→</span></a>
+            <a class="contact-panel-link" href="{% url 'departments' %}">View departments <span aria-hidden="true">→</span></a>
+        </aside>
+    </div>
+</section>
+<section class="content-section form-section">
+    <div class="site-container">
+        <div class="form-card form-card--contact">
+            <h2>Contact us</h2>
+            <p class="form-intro">Fill in your details and we’ll be happy to help.</p>
+            {% if messages %}
+                {% for message in messages %}
+                    <p class="form-feedback" role="status">{{ message }}</p>
+                {% endfor %}
+            {% endif %}
+            <form method="post" class="contacting-form">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="form-submit">Send message</button>
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock %}

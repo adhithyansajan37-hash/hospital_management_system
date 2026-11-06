@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}Create an Account | Unique Wellcare Hospital{% endblock %}
+
+{% block content %}
+<section class="content-section auth-section">
+    <div class="site-container">
+        <div class="form-card auth-card auth-card--signup">
+            <form method="post" class="auth-form signup-form">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="form-submit">Create account</button>
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock %}

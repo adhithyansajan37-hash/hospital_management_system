@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block title %}My Profile | Unique Wellcare Hospital{% endblock %}
+
+{% block content %}
+<section class="page-banner">
+    <div class="site-container">
+        <p class="eyebrow">PATIENT PORTAL</p>
+        <h1>My profile</h1>
+        <p>Keep your contact and emergency details up to date.</p>
+    </div>
+</section>
+
+<section class="content-section profile-section">
+    <div class="site-container">
+        <div class="profile-card">
+            <div class="profile-heading">
+                <div>
+                    <p class="eyebrow">YOUR DETAILS</p>
+                    <h2>{{ user.get_full_name|default:user.username }}</h2>
+                    <p class="profile-email">{{ user.email|default:"Add an email address below" }}</p>
+                    <span class="profile-status"><span aria-hidden="true"></span> Patient account</span>
+                </div>
+                {% if profile.profile_image %}
+                    <img class="profile-image" src="{{ profile.profile_image.url }}" alt="Profile photo">
+                {% else %}
+                    <div class="profile-image profile-image--placeholder" aria-hidden="true">
+                        {{ user.username|first|upper }}
+                    </div>
+                {% endif %}
+            </div>
+
+            <form method="post" enctype="multipart/form-data" class="profile-form">
+                {% csrf_token %}
+                {{ form.non_field_errors }}
+
+                <div class="profile-form-intro">
+                    <div>
+                        <h3>Personal information</h3>
+                        <p>Update your details so our care team can reach you when needed.</p>
+                    </div>
+                    <span class="profile-required">All fields are optional</span>
+                </div>
+
+                <div class="profile-form-grid">
+                    {% for field in form %}
+                        <div class="profile-field{% if field.name == 'address' %} profile-field--full{% endif %}">
+                            {{ field.label_tag }}
+                            {{ field }}
+                            {{ field.errors }}
+                        </div>
+                    {% endfor %}
+                </div>
+
+                <div class="profile-actions">
+                    <p class="profile-actions-note">Your information is private and securely stored.</p>
+                    <button type="submit" class="form-submit">Save changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock %}

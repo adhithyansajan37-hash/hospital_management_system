@@ -1,0 +1,107 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0b1220">
+    <title>{% block title %}Unique Wellcare Hospital{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'home/css/base.css' %}?v=20261104-navy-blue-cards">
+    <link rel="stylesheet" href="{% static 'home/css/style.css' %}?v=20261104-navy-blue-cards">
+</head>
+<body>
+    <header class="site-header">
+        <div class="site-container header-inner">
+            <a class="brand" href="{% url 'index' %}" aria-label="Unique Wellcare Hospital home">
+                <span class="brand-mark" aria-hidden="true">U</span>
+                <span class="brand-copy">
+                    <span class="brand-name">UNIQUE WELLCARE</span>
+                    <span class="brand-tagline">HOSPITAL</span>
+                </span>
+            </a>
+
+            {% if user.is_authenticated %}
+                <div class="header-account">
+                    <a class="account-link" href="{% url 'profile' %}"
+                       {% if request.resolver_match.url_name == 'profile' %}aria-current="page"{% endif %}>
+                        <span class="account-icon" aria-hidden="true">
+                            {{ user.username|first|upper }}
+                        </span>
+                        <span class="account-copy">
+                            <span class="account-label">My account</span>
+                            <span class="account-name">{{ user.username }}</span>
+                        </span>
+                    </a>
+                </div>
+            {% endif %}
+
+            <nav class="site-nav" aria-label="Main navigation">
+                <a href="{% url 'index' %}" {% if request.resolver_match.url_name == 'index' %}aria-current="page"{% endif %}>Home</a>
+                <a href="{% url 'about' %}" {% if request.resolver_match.url_name == 'about' %}aria-current="page"{% endif %}>About</a>
+                <a href="{% url 'doctors' %}" {% if request.resolver_match.url_name == 'doctors' %}aria-current="page"{% endif %}>Doctors</a>
+                <a href="{% url 'departments' %}" {% if request.resolver_match.url_name == 'departments' %}aria-current="page"{% endif %}>Departments</a>
+                <a class="nav-booking" href="{% url 'booking' %}" {% if request.resolver_match.url_name == 'booking' %}aria-current="page"{% endif %}>Booking</a>
+                <a href="{% url 'contact' %}" {% if request.resolver_match.url_name == 'contact' %}aria-current="page"{% endif %}>Contact</a>
+                    {% if user.is_authenticated %}
+                        {% if user.is_staff or user.is_superuser %}
+                            <a class="nav-admin" href="{% url 'profile' %}"
+                               {% if request.resolver_match.url_name == 'profile' %}aria-current="page"{% endif %}>
+                                Admin Dashboard
+                            </a>
+                        {% endif %}
+
+                        <form class="logout-form"
+                                action="{% url 'logout' %}"
+                                method="post">
+                            {% csrf_token %}
+                            <button type="submit" class="logout-button">
+                                Logout
+                            </button>
+                        </form>
+
+                    {% else %}
+
+                        <a href="{% url 'login' %}">Login</a>
+                        <a href="{% url 'signup' %}">Sign Up</a>
+
+                    {% endif %}
+            </nav>
+        </div>
+    </header>
+
+    <main class="page-content">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="site-footer">
+        <div class="site-container footer-main">
+            <div class="footer-about">
+                <a class="footer-brand" href="{% url 'index' %}">UNIQUE WELLCARE HOSPITAL</a>
+                <p>Thoughtful care, connected services, and a healthier community.</p>
+            </div>
+
+            <div class="footer-links">
+                <h2>Explore</h2>
+                <a href="{% url 'about' %}">About us</a>
+                <a href="{% url 'doctors' %}">Our doctors</a>
+                <a href="{% url 'departments' %}">Departments</a>
+                <a href="{% url 'booking' %}">Book an appointment</a>
+                <a href="{% url 'contact' %}">Contact</a>
+            </div>
+
+            <div class="footer-note">
+                <h2>Here for your health</h2>
+                <p>Our team is here to help you find the care and information you need.</p>
+                <a class="footer-contact-link" href="{% url 'contact' %}">Get in touch <span aria-hidden="true">→</span></a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="site-container footer-bottom-inner">
+                <p>&copy; {% now "Y" %} Unique Wellcare Hospital. All rights reserved.</p>
+                <p>Care with compassion.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
